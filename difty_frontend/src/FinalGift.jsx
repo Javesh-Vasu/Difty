@@ -11,7 +11,7 @@ export const FinalGift = () => {
     const [output, setOutput] = useState("");
 	useEffect(() => {
 		(async () => {
-			const res = await axios.get("http://localhost:3000/generateLink", {
+			const res = await axios.get("https://courageous-top-hat-slug.cyclic.app/generateLink", {
 				params: {
 					generatedId: sharableLink.id,
 				},
