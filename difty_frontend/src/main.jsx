@@ -7,7 +7,7 @@ import { store } from "./store.js";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Gift } from "./Gift.jsx";
 import { SharableLink } from "./SharableLink.jsx";
-import { Waitlist } from "./waitlist.jsx";
+import { Waitlist } from "./Waitlist.jsx";
 import { CreateGift } from "./CreateGift.jsx";
 import { FinalGift } from "./FinalGift.jsx";
 
