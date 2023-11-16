@@ -53,7 +53,7 @@ export const Gift = () => {
 			message: output,
 			bg: bg ? bg : templates[count]
 		}
-		const res = await axios.post("http://localhost:3000/generateLink", data)
+		const res = await axios.post("https://courageous-top-hat-slug.cyclic.app/generateLink", data)
 		navigate(`/gift`)
 	}
 
