@@ -18,7 +18,7 @@ export const SharableLink = () => {
 			<OutputGift output={output} bg={bg} heading={heading} />
 			<div className="border border-difty-orange border-solid rounded-2xl pl-4 mt-8 flex items-center gap-2">
 				<div className="w-44 overflow-hidden whitespace-nowrap" ref={linkRef}>
-					http://localhost:5173/gift/{sharableLink}
+					https://difty.netlify.app/gift/{sharableLink}
 				</div>
 				<button onClick={copyToClipBoard} className="px-4 py-3 font-bold self-center bg-difty-orange text-white w-max rounded-2xl">
 					Copy Link!
