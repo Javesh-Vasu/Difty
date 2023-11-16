@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "start_fend": "cd ./difty_frontend && vite --host",
+    "start_bend": "cd ./difty_backend && nodemon index.js",
+    "dev": "concurrently \"npm run start_fend\" \"npm run start_bend\""
+  },
+  "dependencies": {
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.0.1",
+    "vite": "^4.5.0"
+  }
+}
