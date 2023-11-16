@@ -23,7 +23,7 @@ export function CreateGift() {
 			return;
 		}
 		setDims("h-screen p-8");
-		const res = await axios.post("http://localhost:3000/message", content);
+		const res = await axios.post("https://courageous-top-hat-slug.cyclic.app/message", content);
 		dispatch(generatedGift(res.data.generated_gift));
 	};
 
