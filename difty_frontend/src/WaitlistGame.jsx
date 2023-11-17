@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import logo from "./assets/difty_logo.svg";
 import sample from "./assets/sample.png";
 
-export const Waitlist = () => {
+export const WaitlistGame = () => {
 	const [dims, setDims] = useState("h-0");
 	const [textColor, setTextColor] = useState("text-difty-orange");
 	const [bgColor, setBgColor] = useState("bg-difty-orange");
@@ -27,6 +27,7 @@ export const Waitlist = () => {
 					className={`bg-difty-orange absolute top-0 left-0 -z-10 w-screen transition-all duration-500 ${dims}`}
 				></div>
 				<img src={sample} className="w-56 -rotate-6 shadow-2xl rounded-3xl" />
+
 				{flag ? (
 					<div className="flex flex-col items-center font-inter ml-5">
 						<img src={logo} style={{ height: "8rem" }} />

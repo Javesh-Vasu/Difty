@@ -1,5 +1,9 @@
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
+import sample from "./assets/sample.png";
+import forgive from "./assets/forgive.png";
+import gem from "./assets/gem.png";
+import back from "./assets/back_circle.png";
 import {
 	addContent,
 	addFrom,
@@ -11,22 +15,46 @@ import logo from "./assets/difty_logo.svg";
 import { useNavigate } from "react-router-dom";
 import { Toaster, toast } from "react-hot-toast";
 import { useEffect, useState } from "react";
-
-const apiUrl = process.env.REACT_APP_API_URL;
 export function CreateGift() {
+	const apiUrl = process.env.REACT_APP_API_URL;
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const content = useSelector((state) => state.gptContent);
-	const [dims, setDims] = useState("h-0 p-0");
+	const [dimsLoad, setDimsLoading] = useState("h-0 p-0");
+	const [dimsSubs, setDimsSubs] = useState("h-0 p-0");
+	const [loadingStatus, setLoadingStatus] = useState({
+		heading: "While You Wait <br /> Here Is A Poem For You",
+		success: true,
+		content: gem,
+	});
+
+	const closeErrorWindow = () => {
+		setDimsLoading("h-0 p-0");
+		setLoadingStatus({
+			heading: "While You Wait <br /> Here Is A Poem For You",
+			success: true,
+			content: gem,
+		});
+	};
 
 	const showTransition = async () => {
 		if (!content.content || !content.info || !content.to || !content.from) {
 			toast.error("Please fill all fields!");
 			return;
 		}
-		setDims("h-screen p-8");
+		setDimsLoading("h-screen p-8");
 		const res = await axios.post(`${apiUrl}/message`, content);
 		dispatch(generatedGift(res.data.generated_gift));
+		setTimeout(() => {
+			if (!content.output) {
+				setLoadingStatus({
+					heading:
+						"We Are Having Trouble Generating Content<br /><br /> Please Try Later",
+					success: false,
+					content: forgive,
+				});
+			}
+		}, 10000);
 	};
 
 	useEffect(() => {
@@ -41,44 +69,58 @@ export function CreateGift() {
 		}
 	}, [navigate, content.output]);
 
+	const gameSubscribe = () => {
+		setDimsSubs("h-screen p-8");
+	};
+
 	return (
 		<div
-			className={`overflow-x-hidden bg-bg2 bg-no-repeat bg-mygray bg-contain flex flex-col py-10 px-8 items-center justify-between min-h-screen transition-all delay-75 font-kalam text-difty-orange`}
+			className={`overflow-x-hidden flex flex-col py-10 px-8 items-center justify-between min-h-screen transition-all delay-75 font-kalam text-difty-orange`}
 		>
 			<Toaster />
 			<div className="flex items-center w-full">
 				<img src={logo} className="h-10" />
 			</div>
 			<div
-				className={`flex flex-col justify-around items-center overflow-hidden bg-difty-orange absolute top-0 left-0 z-10 w-screen transition-all duration-500 ${dims}`}
+				className={`text-4xl font-bold overflow-hidden text-center text-white flex flex-col gap-5 justify-around items-center bg-difty-orange absolute top-0 left-0 z-10 w-screen transition-all duration-500 ${dimsSubs}`}
 			>
-				<h1 className="font-bold text-2xl text-center text-white">
-					While You Wait
-					<br /> Here Is A Poem For You
-				</h1>
-				<div className="bg-wp8 bg-contain p-4 shadow-2xl rounded-4xl w-full h-488">
-					<div className="bg-white/50 flex flex-col text-black py-8 px-2 rounded-3xl items-center gap-6 h-full">
-						<h1 className="font-bold text-4xl">You Are A Gem!</h1>
-						<p className="text-md px-1">
-							In the waiting room of life, you sat so still, <br />
-							A patient saint, on time's windowsill.
-							<br />
-							Thanks a ton for your patience so grand,
-							<br />
-							You waited for this like grains of sand.
-							<br />
-							<br />
-							While seconds ticked, you didn't lose your cool,
-							<br />
-							For your wait, We are the grateful fool.
-							<br />
-							In the tardy tango, you take the lead,
-							<br />
-							Thanks for waiting, you're a gem indeed!
-						</p>
-					</div>
-				</div>
-				<span className="loader"></span>
+				<img
+					src={back}
+					className="rotate-90 h-8"
+					onClick={() => setDimsSubs("h-0 p-0")}
+				/>
+				<h1>We Are Still Working on it.</h1>
+				<img src={sample} className="w-56 -rotate-6 shadow-2xl rounded-3xl" />
+				<h1> Why Don&apos;t You Subscribe To The Waitlist? </h1>
+				<button
+					className="text-2xl text-difty-orange px-4 py-3 bg-white rounded-2xl min-w-max"
+					onClick={() => navigate("/waitlist/game")}
+				>
+					Subscribe
+				</button>
+			</div>
+			<div
+				className={`flex flex-col justify-around items-center overflow-hidden bg-difty-orange absolute top-0 left-0 z-10 w-screen transition-all duration-500 ${dimsLoad}`}
+			>
+				<h1
+					className="font-bold text-3xl text-center text-white"
+					dangerouslySetInnerHTML={{ __html: loadingStatus.heading }}
+				/>
+				<img
+					src={loadingStatus.content}
+					className=" w-60 -rotate-6 shadow-2xl rounded-3xl"
+				/>
+
+				{loadingStatus.success ? (
+					<span className="loader"></span>
+				) : (
+					<button
+						className="text-2xl text-difty-orange px-4 py-3 bg-white rounded-2xl min-w-max"
+						onClick={() => closeErrorWindow()}
+					>
+						Go Back!
+					</button>
+				)}
 			</div>
 			<div className="flex items-center gap-6">
 				{/* <div className=" bg-white shadow-2xl rounded-4xl -rotate-6 w-40 h-60"> */}
@@ -178,17 +220,19 @@ export function CreateGift() {
 								Story
 							</label>
 						</div>
-						<div className="flex items-center gap-2">
+						<div
+							className="flex items-center gap-2"
+							onClick={() => gameSubscribe()}
+						>
 							<input
 								type="radio"
 								id="game"
 								name="category"
 								value="game"
-								onClick={(e) => dispatch(addContent(e.target.value))}
-								disabled
+								// onClick={(e) => dispatch(addContent(e.target.value))}
 							/>
 							<label
-								htmlFor="game"
+								htmlFor="poem"
 								className="text-lg font-semibold text-gray-500"
 							>
 								Mini Game
@@ -201,7 +245,7 @@ export function CreateGift() {
 					<input
 						type="text"
 						placeholder="What's Your Name?"
-						className="rounded-2xl outline-none border-none bg-white p-4 px-6"
+						className="rounded-2xl outline-none border-none bg-mygray p-4 px-6"
 						onChange={(e) => dispatch(addFrom(e.target.value))}
 					/>
 				</div>
@@ -209,16 +253,17 @@ export function CreateGift() {
 					<input
 						type="text"
 						placeholder="Who is This For?"
-						className="rounded-2xl outline-none border-none bg-white p-4 px-6"
+						className="rounded-2xl outline-none border-none bg-mygray p-4 px-6"
 						onChange={(e) => dispatch(addTo(e.target.value))}
 					/>
 				</div>
 				<div className="flex flex-col">
 					<textarea
 						placeholder='Tell Us More...                                      "Happy Belated Birthday"                                      "I am Sorry"'
-						className="rounded-2xl outline-none border-none bg-white p-4 px-6"
+						className="rounded-2xl outline-none border-none bg-mygray p-4 px-6"
 						rows={3}
 						onChange={(e) => dispatch(addInfo(e.target.value))}
+						maxLength={250}
 					></textarea>
 				</div>
 				<button

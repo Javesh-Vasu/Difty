@@ -10,6 +10,7 @@ import { SharableLink } from "./SharableLink.jsx";
 import { Waitlist } from "./Waitlist.jsx";
 import { CreateGift } from "./CreateGift.jsx";
 import { FinalGift } from "./FinalGift.jsx";
+import { WaitlistGame } from "./WaitlistGame.jsx";
 
 const router = createBrowserRouter([
 	{
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
 	{
 		path: "/gift/:id",
 		element: <FinalGift />,
+	},
+	{
+		path: "/waitlist/game",
+		element: <WaitlistGame />,
 	},
 ]);
 

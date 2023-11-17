@@ -8,12 +8,11 @@ import { addBgImage, addLink } from "./redux/slices/generateTextSlice";
 import { v4 as uuid } from 'uuid';
 import { useNavigate } from "react-router-dom";
 
-const apiUrl = process.env.REACT_APP_API_URL;
-
 export const Gift = () => {
 	const { bg, output, content, heading } = useSelector(
 		(state) => state.gptContent
 	);
+	const apiUrl = process.env.REACT_APP_API_URL;
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const [count, setCount] = useState(0);
