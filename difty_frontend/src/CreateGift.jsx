@@ -11,6 +11,8 @@ import logo from "./assets/difty_logo.svg";
 import { useNavigate } from "react-router-dom";
 import { Toaster, toast } from "react-hot-toast";
 import { useEffect, useState } from "react";
+
+const apiUrl = process.env.REACT_APP_API_URL;
 export function CreateGift() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -23,7 +25,7 @@ export function CreateGift() {
 			return;
 		}
 		setDims("h-screen p-8");
-		const res = await axios.post("https://courageous-top-hat-slug.cyclic.app/message", content);
+		const res = await axios.post(`${apiUrl}/message`, content);
 		dispatch(generatedGift(res.data.generated_gift));
 	};
 

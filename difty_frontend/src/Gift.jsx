@@ -8,6 +8,8 @@ import { addBgImage, addLink } from "./redux/slices/generateTextSlice";
 import { v4 as uuid } from 'uuid';
 import { useNavigate } from "react-router-dom";
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 export const Gift = () => {
 	const { bg, output, content, heading } = useSelector(
 		(state) => state.gptContent
@@ -53,7 +55,7 @@ export const Gift = () => {
 			message: output,
 			bg: bg ? bg : templates[count]
 		}
-		const res = await axios.post("https://courageous-top-hat-slug.cyclic.app/generateLink", data)
+		const res = await axios.post(`${apiUrl}/generateLink`, data)
 		navigate(`/gift`)
 	}
 
