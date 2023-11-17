@@ -57,6 +57,7 @@ export default {
 			height: {
 				"85": "355px",
 				"488": "488px",
+				"46": "8rem",
 			},
 			fontFamily: {
 				baloo: ["'Baloo 2'", "sans-serif"],

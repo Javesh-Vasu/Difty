@@ -21,7 +21,7 @@ export const FinalGift = () => {
 		})();
 	}, []);
 	return (
-		<div className={`flex flex-col items-center font-kalam h-screen p-6 pt-12`}>
+		<div className={`flex flex-col lg:flex-row lg:justify-around lg:p-40 items-center font-kalam h-screen p-6 pt-12`}>
 			<OutputGift output={output} bg={bg} heading={heading} />
 		</div>
 	);

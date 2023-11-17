@@ -73,7 +73,7 @@ export const Gift = () => {
 						onClick={() =>
 							setCount((p) => (p === 0 ? templates.length - 1 : p - 1))
 						}
-						className="fixed cursor-pointer left-4 top-1/2 bg-difty-orange shadow-sm shadow-black p-2 rounded-full h-10 w-10"
+						className="fixed cursor-pointer left-4 lg:left-1/4 top-1/2 bg-difty-orange shadow-sm shadow-black p-2 rounded-full h-10 w-10"
 					/>
 					<p
 						className={`bg-white shadow-2xl rounded-3xl p-4 w-full ${templates[count]} bg-cover`}
@@ -90,7 +90,7 @@ export const Gift = () => {
 						onClick={() =>
 							setCount((p) => (p === templates.length - 1 ? 0 : p + 1))
 						}
-						className="fixed cursor-pointer right-4 top-1/2 bg-difty-orange shadow-sm shadow-black p-2 rounded-full h-10 w-10"
+						className="fixed cursor-pointer right-4 lg:right-1/4 top-1/2 bg-difty-orange shadow-sm shadow-black p-2 rounded-full h-10 w-10"
 					/>
 				</div>
 			</div>
