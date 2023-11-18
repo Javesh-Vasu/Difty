@@ -11,9 +11,20 @@ const giftSchema = new mongoose.Schema({
     bg: String
 })
 
+const promptSchema = new mongoose.Schema({
+    prompt: String
+})
+
+const subscriberSchema = new mongoose.Schema({
+    subscriber: String
+})
+
 dotenv.config();
 
 const SharedGift = mongoose.model('SharedGift' , giftSchema);
+const Prompts = mongoose.model('Prompts', promptSchema );
+const Subscriber = mongoose.model('Subscriber', subscriberSchema);
+
 const dbURI = process.env.MONGO_URI;
 mongoose.connect(dbURI);
 
@@ -44,6 +55,9 @@ app.post("/message",async (req, res)=>{
             model: "gpt-3.5-turbo",
             messages: [{"role": "system", "content": prompt}]
         })
+
+        const usedPrompt = new Prompts({prompt:info});
+        usedPrompt.save();
         res.json({
             generated_gift : aiResponse.choices[0].message.content,
         })
@@ -76,6 +90,17 @@ app.get("/generateLink", async (req,res)=>{
         if ( gift ){
             res.json(gift[0]);
         }
+    }
+    catch(error){
+        res.send(error);
+    }
+})
+
+app.post("/subscribe", async(req,res)=>{
+    try{
+        const subscriber = req.body.subscriber;
+        const newsubscriber = new Subscriber({subscriber});
+        await newsubscriber.save();
     }
     catch(error){
         res.send(error);
