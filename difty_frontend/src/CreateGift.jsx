@@ -51,6 +51,9 @@ export function CreateGift() {
 		setLoaderWidth("w-full");
 		const res = await axios.post(`${apiUrl}/message`, content);
 		dispatch(generatedGift(res.data.generated_gift));
+		if (res.data.generated_gift) {
+			navigate("/generated_gift");
+		}
 		setTimeout(() => {
 			if (!content.output) {
 				setLoadingStatus({
@@ -69,11 +72,9 @@ export function CreateGift() {
 		dispatch(addFrom(""));
 		dispatch(addTo(""));
 	}, []);
-	useEffect(() => {
-		if (content.output) {
-			navigate("/generated_gift");
-		}
-	}, [navigate, content.output]);
+	// useEffect(() => {
+	// 	navigate("/generated_gift");
+	// }, [navigate, content.output]);
 
 	const gameSubscribe = () => {
 		setDimsSubs("h-screen p-8");
