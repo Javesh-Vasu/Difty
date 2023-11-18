@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import logo from "./assets/difty_logo.svg";
 import sample from "./assets/sample.png";
+import { Link } from "react-router-dom";
 
 export const Waitlist = () => {
 	const [dims, setDims] = useState("h-0");
@@ -19,17 +20,19 @@ export const Waitlist = () => {
 		<div
 			className={`flex bg-contain flex-col items-center min-h-screen transition-all delay-75 font-kalam ${textColor}`}
 		>
-			<div className="flex flex-col items-center w-full gap-10 my-auto p-10 h-screen">
+			<div className="flex flex-col items-center w-full gap-10 my-auto p-8 h-screen">
 				<div className="flex items-center w-full">
-					<img src={logo} className="h-10" />
+				<Link to="/">
+					<img src={logo} className="h-10 lg:h-14" />
+				</Link>
 				</div>
 				<div
 					className={`bg-difty-orange absolute top-0 left-0 -z-10 w-screen transition-all duration-500 ${dims}`}
 				></div>
 				<img src={sample} className="w-56 -rotate-6 shadow-2xl rounded-3xl" />
 				{flag ? (
-					<div className="flex flex-col items-center font-inter ml-5">
-						<img src={logo} style={{ height: "8rem" }} />
+					<div className="flex flex-col items-center font-inter">
+						<img src={logo} style={{ height: "8rem" }} className="ml-5" />
 						<div className="flex gap-4 items-center">
 							<input
 								type="email"

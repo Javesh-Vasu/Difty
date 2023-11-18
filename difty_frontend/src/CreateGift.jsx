@@ -18,6 +18,7 @@ import logo from "./assets/difty_logo.svg";
 import { useNavigate } from "react-router-dom";
 import { Toaster, toast } from "react-hot-toast";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 export function CreateGift() {
 	const apiUrl = process.env.REACT_APP_API_URL;
 	const dispatch = useDispatch();
@@ -80,14 +81,16 @@ export function CreateGift() {
 
 	return (
 		<div
-			className={`overflow-x-hidden flex flex-col lg:flex-row py-10 px-8 items-center justify-between lg:justify-around min-h-screen transition-all delay-75 font-kalam text-difty-orange`}
+			className={`overflow-x-hidden flex flex-col lg:gap-6 lg:flex-row py-8 px-8 items-center justify-between lg:justify-around min-h-screen transition-all delay-75 font-kalam text-difty-orange`}
 		>
 			<Toaster />
-			<div className="flex items-center w-full lg:absolute lg:top-8 lg:left-8">
-				<img src={logo} className="h-10 lg:h-14" />
+			<div className="flex items-center mb-10 w-full lg:absolute lg:top-8 lg:left-8">
+				<Link to="/">
+					<img src={logo} className="h-10 lg:h-14" />
+				</Link>
 			</div>
 			<div
-				className={`text-4xl font-bold  overflow-hidden text-center text-white flex flex-col gap-5 justify-around items-center bg-difty-orange absolute top-0 left-0 z-10 w-screen transition-all duration-500 ${dimsSubs}`}
+				className={`text-4xl font-bold overflow-hidden text-center text-white flex flex-col gap-5 justify-around items-center bg-difty-orange fixed top-0 left-0 z-10 w-screen transition-all duration-500 ${dimsSubs}`}
 			>
 				<img
 					src={back}
@@ -105,7 +108,7 @@ export function CreateGift() {
 				</button>
 			</div>
 			<div
-				className={`flex flex-col justify-around items-center overflow-hidden bg-difty-orange absolute top-0 left-0 z-10 w-screen transition-all duration-500 ${dimsLoad}`}
+				className={`flex flex-col justify-around items-center overflow-hidden bg-difty-orange fixed top-0 left-0 z-10 w-screen transition-all duration-500 ${dimsLoad}`}
 			>
 				<h1
 					className="font-bold text-3xl text-center text-white"
@@ -132,15 +135,15 @@ export function CreateGift() {
 			<div className="flex items-center justify-center gap-6 lg:flex-wrap">
 				<img
 					src={ann}
-					className="shadow-2xl lg:rounded-4xl rounded-3xl -rotate-6 w-36 lg:w-48"
+					className="shadow-2xl lg:rounded-4xl rounded-3xl -rotate-6 w-36 lg:w-40 xl:w-48"
 				/>
 				<img
 					src={bday}
-					className="shadow-2xl lg:rounded-4xl rounded-3xl -rotate-6 w-36 lg:w-48"
+					className="shadow-2xl lg:rounded-4xl rounded-3xl -rotate-6 w-36 lg:w-40 xl:w-48"
 				/>
 				<img
 					src={sorry}
-					className="shadow-2xl lg:rounded-4xl rounded-3xl -rotate-6 w-36 lg:w-48"
+					className="shadow-2xl lg:rounded-4xl rounded-3xl -rotate-6 w-36 lg:w-40 xl:w-48"
 				/>
 			</div>
 			<div className="flex flex-col gap-4 w-full mb-12 lg:w-1/3">

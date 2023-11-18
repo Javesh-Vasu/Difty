@@ -5,8 +5,9 @@ import back from "./assets/back.svg";
 import next from "./assets/next.svg";
 import logo from "./assets/difty_logo.svg";
 import { addBgImage, addLink } from "./redux/slices/generateTextSlice";
-import { v4 as uuid } from 'uuid';
+import { v4 as uuid } from "uuid";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const Gift = () => {
 	const { bg, output, content, heading } = useSelector(
@@ -52,18 +53,20 @@ export const Gift = () => {
 		const data = {
 			generatedId,
 			message: output,
-			bg: bg ? bg : templates[count]
-		}
-		const res = await axios.post(`${apiUrl}/generateLink`, data)
-		navigate(`/gift`)
-	}
+			bg: bg ? bg : templates[count],
+		};
+		const res = await axios.post(`${apiUrl}/generateLink`, data);
+		navigate(`/gift`);
+	};
 
 	return (
 		<div
-			className={`overflow-x-hidden flex flex-col py-10 px-8 items-center min-h-screen transition-all delay-75 font-kalam text-difty-orange`}
+			className={`overflow-x-hidden flex flex-col p-8 items-center min-h-screen transition-all delay-75 font-kalam text-difty-orange`}
 		>
 			<div className="flex items-center w-full">
-				<img src={logo} className="h-10" />
+				<Link to="/">
+					<img src={logo} className="h-10 lg:h-14" />
+				</Link>
 			</div>
 			<div className="flex flex-col gap-5 my-auto items-center justify-center h-full">
 				<h1 className="text-4xl font-bold font-kalam">Your Gift !</h1>
@@ -94,7 +97,10 @@ export const Gift = () => {
 					/>
 				</div>
 			</div>
-			<button className="bg-difty-orange py-3 px-6 rounded-2xl font-bold text-white text-xl my-5 mb-10" onClick={generateLink}>
+			<button
+				className="bg-difty-orange py-3 px-6 rounded-2xl font-bold text-white text-xl my-5 mb-10"
+				onClick={generateLink}
+			>
 				Generate Link
 			</button>
 		</div>
